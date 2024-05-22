@@ -1,0 +1,70 @@
+frontend:
+  page_config:
+    page_title: 'MLOps Credit Risk Model'
+    page_icon: ../media/images/favicon.ico
+    layout: 'centered'
+
+preprocessing:
+  raw_data_path: ../data/raw/data.parquet
+  train_data_path: ../data/processed/train.parquet
+  test_data_path: ../data/processed/test.parquet
+  check_data_path: ../data/check/test.parquet
+  uniq_cat_values_path: ../data/processed/uniq_cat_values.json
+  min_max_num_values_path: ../data/processed/min_max_num_values.json
+  relevant_columns: ["age_years", "employedfrom", "pmtnum_254L", "num_cred_closed", "annuity_780A", "credamount_770A",
+                     "debt_outstand_total", "isbidproduct", "numberofoverdueinstlmaxdat_148D", "incometype_1044T",
+                     "total_amount_closed_contracts", "num_cred_active", "mobilephncnt_593L", "tax_amount_max",
+                     "maininc_215A"]
+  drop_columns: ["month_decision", "weekday_decision"]
+  index_col: "case_id"
+  target_col: "target"
+  group_col: "WEEK_NUM"
+  finance_amount_col: "credamount_770A"
+  transform_cols: ["employedfrom", "numberofoverdueinstlmaxdat_148D"]
+  test_size: 0.25
+  test_size_val: 0.16
+  random_state: 0
+
+train:
+  baseline_model_path: ../models/baseline_model_catboost.joblib
+  tuned_model_path: ../models/tuned_model_catboost.joblib
+  study_path: ../models/study.db
+  pruner_path: ../models/pruner.pkl
+  metrics_path: ../report/metrics.json
+  n_folds: 3
+  rand: 0
+  n_trials: 1
+  n_jobs: 1
+  n_estimators: 200
+  learning_rate: 0.15799795039642622
+  static_params_catboost:
+    od_wait: 10
+    rsm: .1
+    border_count: 254
+    use_best_model: True
+
+caching:
+  cached_images_info_path: ../cached/images/info.parquet
+  cached_images_path: ../cached/images/
+
+shap:
+  shap_path: ../cached/shap/
+  shap_values_data_path: ../cached/shap/shap_values_data.json
+  shap_values_path: ../cached/shap/shap_values.joblib
+  shap_values_legacy_path: ../cached/shap/shap_values_legacy.joblib
+
+endpoints:
+#  train_preprocess: "http://localhost:8000/train_preprocess"
+#  train_optuna: "http://localhost:8000/train_optuna"
+#  train: "http://localhost:8000/train"
+#  predict: "http://localhost:8000/predict"
+#  predict_from_file: "http://localhost:8000/predict_from_file"
+#  update_shap: "http://localhost:8000/update_shap"
+#  finance: "http://localhost:8000/finance"
+  train_preprocess: "http://fastapi:8000/train_preprocess"
+  train_optuna: "http://fastapi:8000/train_optuna"
+  train: "http://fastapi:8000/train"
+  predict: "http://fastapi:8000/predict"
+  predict_from_file: "http://fastapi:8000/predict_from_file"
+  update_shap: "http://fastapi:8000/update_shap"
+  finance: "http://fastapi:8000/finance"

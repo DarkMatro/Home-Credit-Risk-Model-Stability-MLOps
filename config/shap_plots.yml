@@ -1,0 +1,19 @@
+beeswarm_plot:
+  img_type: beeswarm_plot
+  img_format: svg
+  params:
+    dark_mode: True
+
+scatter_plots:
+  img_type: scatter_plots
+  img_format: svg
+  params:
+    dark_mode: True
+    features: ["age_years", "pmtnum_254L", "tax_amount_max", "employedfrom"]
+    color_features: ["education_max", "days_90_120_180", "annuity_780A", "isbidproduct"]
+
+decision_plot:
+  img_type: decision_plot
+  img_format: jpeg
+  params:
+    dark_mode: True

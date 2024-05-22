@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  fastapi:
+    build: backend/
+    ports:
+      - 8000:8000
+    networks:
+      - deploy_network
+    container_name: fastapi
+    volumes:
+      - config:/app/config
+      - data:/app/data
+      - models:/app/models
+      - report:/app/report
+      - cached:/app/cached
+
+  streamlit:
+    build: frontend/
+    depends_on:
+      - fastapi
+    ports:
+        - 8501:8501
+    networks:
+      - deploy_network
+    container_name: streamlit
+    volumes:
+      - config:/app/config
+      - data:/app/data
+      - models:/app/models
+      - report:/app/report
+      - cached:/app/cached
+      - media:/app/media
+
+volumes:
+    config:
+    data:
+    models:
+    report:
+    cached:
+    media:
+
+networks:
+  deploy_network:
+    driver: bridge

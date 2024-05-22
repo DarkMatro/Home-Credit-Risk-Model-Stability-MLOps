@@ -1,0 +1,7 @@
+[theme]
+
+base = "dark"
+
+primaryColor = "#FF124F"
+
+font="sans serif"

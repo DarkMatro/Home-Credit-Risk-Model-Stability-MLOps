@@ -1,0 +1,11 @@
+uvicorn>=0.29.0
+fastapi>=0.111.0
+traitlets>=5.14.3
+numpy>=1.26.4
+pandas>=2.2.2
+scikit-learn>=1.4.2
+optuna>=3.6.1
+catboost>=1.2.5
+shap>=0.45.1
+joblib>=1.4.2
+pyarrow>=16.0.0

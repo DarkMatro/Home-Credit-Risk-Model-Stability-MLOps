@@ -1,0 +1,117 @@
+plot_1_1:
+  img_type: overlapping_densities
+  img_format: SVG
+  params:
+    target_col: "age_years"
+    category_col: "incometype_1044T"
+    x_label: "Возраст"
+    x_lim: [10., 80.]
+    aspect: 30.
+    height: 0.7
+    label_x_pos: 0.0
+    palette: "cool"
+
+plot_1_2:
+  img_type: boxplot_with_stripplot
+  img_format: jpeg
+  params:
+    x: "maininc_215A"
+    y: "incometype_1044T"
+    hue: "target"
+    x_label: "Размер основного дохода"
+    palette: "cool"
+    use_glow_effect: True
+
+plot_2:
+  img_type: joint_plot
+  img_format: jpeg
+  params:
+    target_col: "target"
+    x: "annuity_780A"
+    y: "tax_amount_max"
+    hue: "target"
+    x_label: "Размер ежемесячного платежа"
+    y_label: "Размер налога"
+    size_order: [0, 1]
+    sizes: [2, 20]
+    palette: "cool"
+    ylim: [.1, 1_000_000]
+
+stat_2:
+  test_type: corr
+  columns: ["annuity_780A", "tax_amount_max"]
+
+plot_3:
+  img_type: displot
+  img_format: svg
+  params:
+    x: "employedfrom"
+    hue: "target"
+    x_label: "Общий трудовой стаж (в днях относительно даты записи)"
+    palette: "cool"
+
+stat_3:
+  test_type: similarity
+  columns: ["employedfrom", "target"]
+
+plot_4:
+  img_type: relplot
+  img_format: jpeg
+  params:
+    x: "credamount_770A"
+    y: "debt_outstand_total"
+    hue: "mobilephncnt_593L"
+    x_label: "Размер кредита"
+    y_label: "Размер непогашенного долга"
+    size: "pmtnum_254L"
+    sizes: [1, 30]
+    aspect: 2.0
+
+stat_4:
+  test_type: corr
+  columns: ["credamount_770A", "debt_outstand_total"]
+
+plot_5:
+  img_type: boxplot
+  img_format: jpeg
+  params:
+    x: "numberofoverdueinstlmaxdat_148D"
+    hue: "target"
+    palette: "cool"
+    x_label: "Дни с последней просрочки платежа по закрытому договору"
+    dark_mode: True
+
+stat_5:
+  test_type: similarity
+  columns: ["numberofoverdueinstlmaxdat_148D", "target"]
+
+plot_6_1:
+  img_type: cat_reg_plot
+  img_format: jpeg
+  params:
+    x: "num_cred_closed"
+    y: "total_amount_closed_contracts"
+    hue: "target"
+    x_label: "Количество закрытых кредитов"
+    y_label: "Общая сумма всех закрытых кредитов"
+    aspect: 3.0
+    palette: "cool"
+
+stat_6_1:
+  test_type: similarity
+  columns: ["num_cred_closed", "target"]
+
+plot_6_2:
+  img_type: boxplot
+  img_format: jpeg
+  params:
+    x: "total_amount_closed_contracts"
+    hue: "target"
+    palette: "cool"
+    x_label: "Общая сумма всех закрытых кредитов"
+    dark_mode: True
+    log_scale: True
+
+stat_6_2:
+  test_type: similarity
+  columns: ["total_amount_closed_contracts", "target"]
